@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="810.0" prefWidth="1290.0" style="-fx-background-color: #F4F7FB;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainSceneController">
+   <children>
+
+   </children>
+   <left>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+         <effect>
+            <DropShadow height="5.0" radius="6.0" />
+         </effect>
+         <children>
+            <Label fx:id="user" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="12.0" prefHeight="32.0" prefWidth="190.0" style="-fx-border-color: #EC0B43; -fx-background-radius: 15px; -fx-border-radius: 15px; -fx-border-width: 2; -fx-background-color: #EC0B43;" text="user" textAlignment="CENTER" textFill="WHITE">
+            <font>
+               <Font name="SFNS Display" size="20.0" />
+            </font>
+         </Label>
+            <Label alignment="CENTER" layoutX="25.0" layoutY="62.0" lineSpacing="2.0" prefHeight="30.0" prefWidth="150.0" style="-fx-font-weight: bold;" text="COMMANDS" textAlignment="CENTER" textFill="#1946ba" underline="true">
+               <font>
+                  <Font name="ALS Schlange sans" size="20.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Label>
+            <VBox alignment="TOP_CENTER" layoutX="11.0" layoutY="95.0" prefHeight="607.0" prefWidth="178.0" style="-fx-spacing: 8;">
+               <children>
+                  <Button fx:id="help" onAction="#clickHelp" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="10.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="help" textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="info" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="info" textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="clear" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="clear" textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="history" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="history" textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button><Button fx:id="add" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="add" textFill="#1946ba">
+                  <font>
+                     <Font name="SFNS Display" size="15.0" />
+                  </font>
+                  <cursor>
+                     <Cursor fx:constant="HAND" />
+                  </cursor>
+               </Button>
+                  <Button fx:id="add_if_min" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="add_if_min" textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="remove_lower" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="remove_lower" textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="update_id" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="update_id" textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="remove_by_id" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="remove_by_id" textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="group_counting_by_id" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="group_counting_by_id" textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="execute_script" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="execute_script " textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="count_by_albums_count" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="count_by_albums_count" textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="count_greater_than_albums_count" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="count_greater_than_albums_count" textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="10.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="exit" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="exit" textFill="#1946ba">
+                     <font>
+                        <Font name="SFNS Display" size="15.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </Pane>
+   </left>
+   <top>
+      <Pane style="-fx-background-color: #FFFFFF;">
+         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="4.0" prefHeight="100.0" prefWidth="580.0" style="-fx-font-family: &quot;ALS Schlange sans&quot;; -fx-font-weight: bold; -fx-font-size: 48px;" text="COLLECTION MANAGER" textFill="#1946ba">
+            <font>
+               <Font name="ALS Schlange sans" size="48.0" />
+            </font>
+         </Label>
+         <ImageView fitHeight="112.0" fitWidth="159.0" layoutX="23.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@media/itmo_small_white_eng.png" />
+            </image>
+         </ImageView>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
+   </top>
+</BorderPane>
