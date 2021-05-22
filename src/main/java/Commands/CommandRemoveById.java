@@ -28,7 +28,7 @@ public class CommandRemoveById extends Command{
         if (fields.length == 2){
             try {
                 collection.removeAll(collection.stream().filter((mb) -> mb.getUser().equals(user)).filter((mb) -> mb.getId() == (Long.parseLong(fields[1]))).collect(Collectors.toList()));
-                if (size != collection.size()) message = "Элементы с такм id были успешно удалены";
+                if (size != collection.size()) message = "Команда выполнена";
                 else message = "Не найдено элементов с таким id";
                 logger.info(message);
                 message = message + "\n";

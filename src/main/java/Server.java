@@ -31,6 +31,7 @@ public class Server extends RecursiveTask<String> {
     private static final String temp = System.getenv().get("MusicBandPATH3"); // переменная окружения
     private static final String serializedDate = "serializedDate.txt"; // файл для передачи сериализованных сообщений
     private static final Logger logger = LogManager.getLogger(); // логгер
+    private static Boolean work;
 
 
     /**
@@ -42,9 +43,10 @@ public class Server extends RecursiveTask<String> {
             logger.info("Сервер запущен!");
             DateBase.connect(collection);
             while (true) {
+                work = true;
                 connection(true, "non");
                 authorisation();
-                while (true) {
+                while (work) {
                     String message = commonPool.invoke(new Server());
                     if (message != null) {
                         write(message);
@@ -60,7 +62,7 @@ public class Server extends RecursiveTask<String> {
                 }
             }
         } catch (IOException | InterruptedException e) {
-            System.err.println(e);
+            logger.error(e.getMessage());
         }
     }
 
@@ -125,10 +127,20 @@ public class Server extends RecursiveTask<String> {
      * @throws IOException - ошибка чтения запроса
      */
     public static String read() throws IOException {
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-        String message = in.readLine();
-        message = serialization.DeserializeObject(temp, serializedDate);
+        String message = null;
+        try {
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+            message = in.readLine();
+            message = serialization.DeserializeObject(temp, serializedDate);
+        } catch (IOException e) {
+            try {
+                connection(false, "non");
+            } catch (IOException ioException) {
+                logger.error(ioException.getMessage());
+            }
+            work = false;
+        }
         return message;
     }
 
@@ -144,7 +156,7 @@ public class Server extends RecursiveTask<String> {
         Runnable task = () -> {
             try {
                 logger.info("Пользватель " + clientLogin + " ввёл: " + message);
-                String messageToClient = "\nСервер принял команду: " + message + "\n" + execution(message, today);
+                String messageToClient = execution(message, today);
                 serialization.SerializeObject(messageToClient, temp, serializedDate);
                 out.write("\n");
                 out.flush();
@@ -185,30 +197,24 @@ public class Server extends RecursiveTask<String> {
      * Модуль авторизации
      */
     public static void authorisation() {
-        while (true) {
+        while (work) {
             try {
-                String[] fields = read().split(" ");
-                boolean work = false;
-                if (fields.length == 3){
-                    clientLogin = fields[0];
-                    if (fields[2].equals("2")) work = DateBase.addUser(fields[0], fields[1]);
-                    else if (fields[2].equals("1")) work = DateBase.login(fields[0], fields[1]);
+                String message = read();
+                if (message != null) {
+                    String[] fields = message.split(" ");
+                    boolean work = false;
+                    if (fields.length == 3){
+                        clientLogin = fields[0];
+                        if (fields[2].equals("2")) work = DateBase.addUser(fields[0], fields[1]);
+                        else if (fields[2].equals("1")) work = DateBase.login(fields[0], fields[1]);
+                    }
+                    write(work);
+                    if (work) break;
                 }
-                write(work);
-                if (work) break;
             } catch (IOException e) {
                 logger.error("Ошибка авторизации");
             }
         }
-    }
-
-    /**
-     * геттер логина
-     *
-     * @return - имя пользователя
-     */
-    public static String getLogin() {
-        return clientLogin;
     }
 
     /**
@@ -222,7 +228,7 @@ public class Server extends RecursiveTask<String> {
         try {
             message = read();
         } catch (IOException e) {
-            logger.error("Невозможно считать запрос");
+            logger.error(e.getMessage());
         }
         return message;
     }

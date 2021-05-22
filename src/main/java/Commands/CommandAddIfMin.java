@@ -48,7 +48,7 @@ public class CommandAddIfMin extends Command{
                 logger.info(message);
                 message = message + "\n";
             } else {
-                message = "Элемент добавлен в коллекцию";
+                message = "Команда выполнена";
                 logger.info(message);
                 message = message + "\n";
             }

@@ -13,7 +13,7 @@ public class CommandHelp extends Command{
      * Метод который выводит справку по всем командам
      */
     public static Object action(){
-        Object messsage = ("""
+        Object message = ("""
                 help : вывести справку по доступным командам
                 info : вывести в стандартный поток вывода информацию о коллекции
                 show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении"
@@ -31,6 +31,6 @@ public class CommandHelp extends Command{
                 count_greater_than_albums_count albumsCount : вывести количество элементов, значение поля albumsCount которых больше заданного
                 """);
         logger.info("Команда выполнена");
-        return messsage;
+        return message;
     }
 }

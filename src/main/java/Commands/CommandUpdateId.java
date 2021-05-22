@@ -43,7 +43,7 @@ public class CommandUpdateId extends Command{
                     collection.remove((arr[index]));
                     CommandSave.action(collection);
                     manager.add(element, collection);
-                    message = "id успешно обновлён";
+                    message = "Команда выполнена";
                     logger.info(message);
                     message = message + "\n";
                     work = true;

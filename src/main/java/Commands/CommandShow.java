@@ -23,12 +23,12 @@ public class CommandShow extends Command{
         arr = collection.toArray(new MusicBand[0]);
         for (int i =0; i < collection.size(); i++){
             if (i == 0 && i == collection.size()-1){
-                message = (arr[i].show() + "\n");
+                message = (arr[i].toString() + "\n");
             } else if (i == 0) {
-                message = (arr[i].show());
+                message = (arr[i].toString());
             } else if (i == collection.size()-1) {
-                message = (message + "\n" +  arr[i].show() + "\n");
-            } else message = (message + "\n" + arr[i].show());
+                message = (message + "\n" +  arr[i].toString() + "\n");
+            } else message = (message + "\n" + arr[i].toString());
         }
         logger.info("Команда выполнена");
         if (message.equals("")) message = "Коллекция пустая\n";

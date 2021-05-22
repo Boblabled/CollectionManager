@@ -42,7 +42,7 @@ public class CommandRemoveLower extends Command{
             if (element.split(",").length == 12) {
                 String elementPrepared = element;
                 collection.removeAll(collection.stream().filter((mb) -> mb.getUser().equals(user)).filter((mb) -> mb.hashCode() == (manager.set(elementPrepared, user).hashCode())).collect(Collectors.toSet()));
-                if (size != collection.size()) message = "Наименьшии элементы удалены";
+                if (size != collection.size()) message = "Команда выполнена";
                 else message = "Не найденно элементов меньше заданного";
                 logger.info(message);
                 message = message + "\n";

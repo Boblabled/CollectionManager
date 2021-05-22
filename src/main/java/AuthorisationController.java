@@ -9,7 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 public class AuthorisationController {
     private boolean firstClickEnter = false;
@@ -88,7 +87,7 @@ public class AuthorisationController {
                 mainScene(stage, login);
             }
             else {
-                Window.warning("Ошибка авторизации","Неправильный логин или пароль");
+                Window.warning("Ошибка авторизации","Такой пользователь уже существует");
             }
         }
     }
@@ -107,7 +106,7 @@ public class AuthorisationController {
                 mainScene(stage, login);
             }
             else {
-                Window.warning("Ошибка авторизации","Такой пользователь уже существует");
+                Window.warning("Ошибка авторизации","Неправильный логин или пароль");
             }
         }
     }

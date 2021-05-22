@@ -135,7 +135,7 @@ public class MusicBand implements Comparable<MusicBand>{
             }
         } catch (NumberFormatException | ParseException e) {
             logger.error("establishmentDate неверный формат строки!");
-            System.exit(0);
+            this.establishmentDate = new Date();
         }
     }
 
