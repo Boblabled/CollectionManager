@@ -57,4 +57,12 @@ public class Coordinates {
         result = x + ","+ y;
         return (result);
     }
+
+    public double getY() {
+        return y;
+    }
+
+    public Float getX() {
+        return x;
+    }
 }

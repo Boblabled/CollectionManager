@@ -1,0 +1,40 @@
+.text-field:hover {
+    -fx-background-color: #FFFFFF!important;
+    -fx-border-color: #1946ba!important;
+    -fx-text-fill: #EC0B43!important;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.text-field:focused{
+    -fx-background-color: #FFFFFF!important;
+    -fx-border-color: #1946ba!important;
+    -fx-text-fill: #EC0B43!important;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.combo-box:focused{
+    -fx-background-color: #FFFFFF!important;
+    -fx-border-color: #1946ba!important;
+    -fx-text-fill: #EC0B43!important;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.combo-box:hover{
+    -fx-background-color: #FFFFFF!important;
+    -fx-border-color: #1946ba!important;
+    -fx-prompt-text-fill: #EC0B43!important;
+    -fx-text-fill: #EC0B43!important;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.combo-box:hover .list-cell, .combo-box:hover .arrow-button {
+    -fx-text-fill: #EC0B43;
+}
+
+.combo-box:focused .list-cell, .combo-box:focused .arrow-button {
+    -fx-text-fill: #EC0B43;
+}

@@ -1,8 +1,9 @@
 package Commands;
 
-import DateBase.DateBase;
+import Manager.DateBaseManager;
 import Elements.MusicBand;
 
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashSet;
 
 /**
@@ -15,9 +16,9 @@ public class CommandSave extends Command{
      *
      * @param collection - коллекция
      */
-    public static void action(LinkedHashSet<MusicBand> collection){
+    public static void action(LinkedHashSet<MusicBand> collection) throws UnsupportedEncodingException {
         Object[] elements = collection.toArray();
-        DateBase.executeCommand("TRUNCATE TABLE musicband");
+        DateBaseManager.executeCommand("TRUNCATE TABLE musicband");
         for (Object element : elements) {
             String[] fields = element.toString().split(",");
             String command = ("INSERT INTO MusicBand (id, name, coordinate_X, coordinate_Y, creationDate, numberOfParticipants, " +
@@ -25,7 +26,7 @@ public class CommandSave extends Command{
                     "frontMan_Nationality, \"user\") VALUES (" + fields[0] + ", '" + fields[1] + "', " + fields[2] + ", " + fields[3] + ", '" +
                     fields[4] + "', " + fields[5] + ", " + fields[6] + ", '" + fields[7] + "', '" + fields[8] + "', '" + fields[9] +
                     "', " + fields[10] + ", '" + fields[11] + "', '" + fields[12] + "', '" + fields[13] + "', '" + fields[14] + "')");
-            DateBase.executeCommand(command);
+            DateBaseManager.executeCommand(command);
         }
     }
 }

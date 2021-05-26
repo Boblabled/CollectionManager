@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -10,14 +13,14 @@
    <children>
       <Pane layoutX="108.0" layoutY="68.0" prefHeight="405.0" prefWidth="645.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 40px;">
          <children>
-            <PasswordField fx:id="passwordField" layoutX="190.0" layoutY="216.0" prefHeight="50.0" prefWidth="250.0" promptText="Пароль" style="-fx-border-color: #1946ba; -fx-background-radius: 2px; -fx-border-radius: 2px; -fx-border-width: 2;" visible="false">
+            <PasswordField fx:id="passwordField" layoutX="190.0" layoutY="216.0" prefHeight="50.0" prefWidth="250.0" promptText="Пароль" style="-fx-border-color: #1946ba; -fx-background-radius: 2px; -fx-border-radius: 2px; -fx-border-width: 2;" stylesheets="@scripts/loginFields.css" visible="false">
                <font>
                   <Font name="SFNS Display" size="12.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor></PasswordField>
-            <TextField fx:id="loginField" layoutX="190.0" layoutY="153.0" prefHeight="50.0" prefWidth="250.0" promptText="Логин" style="-fx-border-color: #1946ba; -fx-border-radius: 2px; -fx-background-radius: 2px; -fx-border-width: 2;" visible="false">
+            <TextField fx:id="loginField" layoutX="190.0" layoutY="153.0" prefHeight="50.0" prefWidth="250.0" promptText="Логин" style="-fx-border-color: #1946ba; -fx-border-radius: 2px; -fx-background-radius: 2px; -fx-border-width: 2;" stylesheets="@scripts/loginFields.css" visible="false">
                <font>
                   <Font name="SFNS Display" size="12.0" />
                </font>
@@ -29,9 +32,9 @@
                   <Font name="ALS Schlange sans" size="48.0" />
                </font>
             </Label>
-            <Button fx:id="registerButton" contentDisplay="CENTER" layoutX="190.0" layoutY="280.0" mnemonicParsing="false" onAction="#clickRegister" prefHeight="50.0" prefWidth="250.0" style="-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #EC0B43; -fx-border-color: #EC0B43; -fx-border-width: 2;" stylesheets="@scripts/buttonStyle.css" text="РЕГИСТРАЦИЯ" textFill="WHITE">
+            <Button fx:id="registerButton" contentDisplay="CENTER" layoutX="190.0" layoutY="280.0" mnemonicParsing="false" onAction="#clickRegister" prefHeight="50.0" prefWidth="250.0" style=" -fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #EC0B43; -fx-border-color: #EC0B43; -fx-border-width: 2;" stylesheets="@scripts/buttonStyle.css" text="РЕГИСТРАЦИЯ" textFill="WHITE">
                <font>
-                  <Font size="20.0" />
+                  <Font name="SFNS Display" size="20.0" />
                </font>
             </Button>
             <Button fx:id="enterButton" contentDisplay="CENTER" layoutX="190.0" layoutY="216.0" mnemonicParsing="false" onAction="#clickEnter" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #1946ba; -fx-background-radius: 15px; -fx-border-radius: 15px; -fx-border-width: 2; " stylesheets="@scripts/buttonStyle.css" text="ВХОД">
@@ -39,7 +42,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
                <font>
-                  <Font size="20.0" />
+                  <Font name="SFNS Display" size="20.0" />
                </font>
             </Button>
             <Button fx:id="backButton" alignment="BASELINE_CENTER" cacheShape="false" centerShape="false" contentDisplay="TOP" layoutX="182.0" layoutY="124.0" mnemonicParsing="false" onAction="#clickBack" prefHeight="25.0" prefWidth="58.0" scaleShape="false" style="-fx-background-color: #FFFFFF;" stylesheets="@scripts/buttonBack.css" text="Назад" textFill="#1946ba" visible="false">
@@ -54,5 +57,23 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Pane>
+      <ComboBox fx:id="language" layoutX="686.0" layoutY="14.0" onAction="#clickLanguage" prefWidth="160.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #1946ba; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-border-width: 2;" stylesheets="@scripts/languageStyle.css">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Русский" />
+               <String fx:value="Norsk" />
+               <String fx:value="Català" />
+               <String fx:value="Español (Puerto Rico)" />
+            </FXCollections>
+         </items>
+         <value>
+            <String fx:value="Русский" />
+         </value>
+      </ComboBox>
+      <ImageView fitHeight="29.0" fitWidth="40.0" layoutX="651.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@media/languages.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

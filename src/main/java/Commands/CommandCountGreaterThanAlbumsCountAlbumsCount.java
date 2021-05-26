@@ -1,9 +1,11 @@
 package Commands;
 
 import Elements.MusicBand;
+import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashSet;
 
 /**
@@ -18,7 +20,7 @@ public class CommandCountGreaterThanAlbumsCountAlbumsCount extends Command{
      * @param command - строка котрую вводят с консоли
      * @param collection - коллекция
      */
-    public static Object action(String command, LinkedHashSet<MusicBand> collection){
+    public static Object action(String command, LinkedHashSet<MusicBand> collection) throws UnsupportedEncodingException {
         Object message = "";
         String[] fields;
         fields = command.split(" ");
@@ -26,10 +28,10 @@ public class CommandCountGreaterThanAlbumsCountAlbumsCount extends Command{
             try {
                 long albumsCount = Long.parseLong(fields[1]);
                 long count = collection.stream().filter((mb) -> mb.getAlbumsCount() > (albumsCount)).count();
-                message = "Количество элементов больше такого albumsCount: " + count + "\n";
-                logger.info("Команда выполнена");
+                message = LocaleManager.localizer("albumsCount.execution.success.more") + " albumsCount: " + count + "\n";
+                logger.info(LocaleManager.localizer("execution.success"));
             } catch (NumberFormatException e) {
-                message = "albumsCount неверный формат строки!";
+                message = "albumsCount " + LocaleManager.localizer("execution.incorrectStringEnter");
                 logger.error(message);
                 message = message + "\n";
             }

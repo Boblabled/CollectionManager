@@ -1,9 +1,11 @@
 package Commands;
 
 import Elements.MusicBand;
+import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
@@ -24,7 +26,7 @@ public class CommandExecution extends Command{
      * @param time - текущее время
      * @return - сообщение клиенту
      */
-    public static Object action(LinkedHashSet<MusicBand> collection, String line, String command, LocalDateTime time, String user){
+    public static Object action(LinkedHashSet<MusicBand> collection, String line, String command, LocalDateTime time, String user) throws UnsupportedEncodingException {
         Object message = "";
         if (line.equals("help")){
             message = CommandHelp.action();
@@ -64,6 +66,10 @@ public class CommandExecution extends Command{
             message = CommandRemoveLower.action(line, collection, user);
             CommandSave.action(collection);
             CommandHistory.save(command);
+        } else if ((command).equals("remove")){
+            message = CommandRemove.action(line, collection, user);
+            CommandSave.action(collection);
+            CommandHistory.save(command);
         } else if ((line).equals("group_counting_by_id")){
             message = CommandGroupCountingById.action(collection);
             CommandSave.action(collection);
@@ -88,12 +94,11 @@ public class CommandExecution extends Command{
             message = CommandExecuteScript.action(collection, line, command, time, user);
             CommandSave.action(collection);
             CommandHistory.save(command);
+        } else if ((command).equals("language")){
+            message = CommandChangeLanguage.action(line);
         } else {
-            message= ("""
-                    Неизвестная команда
-                    help : вывести справку по доступным командам
-                    """);
-            logger.error("Неизвестная команда");
+            message= (LocaleManager.localizer("execution.unknownCommand") + "\n" + "help : " + LocaleManager.localizer("commandHelp.help"));
+            logger.error(LocaleManager.localizer("execution.unknownCommand"));
         }
         return message;
     }

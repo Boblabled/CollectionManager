@@ -1,9 +1,11 @@
 package Commands;
 
 import Elements.MusicBand;
+import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashSet;
 
 /**
@@ -18,7 +20,7 @@ public class CommandCountByAlbumsCount extends Command{
      * @param command - строка котрую вводят с консоли
      * @param collection - коллекция
      */
-    public static Object action(String command, LinkedHashSet<MusicBand> collection){
+    public static Object action(String command, LinkedHashSet<MusicBand> collection) throws UnsupportedEncodingException {
         Object message = "";
         String[] fields;
         fields = command.split(" ");
@@ -26,17 +28,17 @@ public class CommandCountByAlbumsCount extends Command{
             try {
                 long albumsCount = Long.parseLong(fields[1]);
                 long count = collection.stream().filter((mb) -> mb.getAlbumsCount().equals(albumsCount)).count();
-                if (count != 0) message = "Количество элементов с таким albumsCount: " + count + "\n";
-                else message = "Не найдены элементы с таким albumsCount\n";
-                logger.info("Команда выполнена");
+                if (count != 0) message = LocaleManager.localizer("albumsCount.execution.success") + " albumsCount: " + count + "\n";
+                else message = LocaleManager.localizer("execution.element.missingString") + " albumsCount";
+                logger.info(LocaleManager.localizer("execution.success"));
             } catch (NumberFormatException e) {
-                message = "albumsCount неверный формат строки!";
+                message = "albumsCount " + LocaleManager.localizer("execution.incorrectStringEnter");
                 logger.error(message);
                 message = message + "\n";
             }
 
         } else {
-            message = "Неверный формат ввода данных";
+            message = LocaleManager.localizer("execution.incorrectEnter");
             logger.error(message);
             message = message + "\n";
         }

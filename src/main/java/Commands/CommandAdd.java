@@ -1,13 +1,13 @@
 package Commands;
-import DateBase.DateBase;
+
 import Elements.MusicBand;
 import Manager.Manager;
+import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashSet;
-import java.util.stream.Stream;
 
 /**
  * Класс команды которая добавляет новый элемент в коллекцию
@@ -21,7 +21,7 @@ public class CommandAdd extends Command{
      * @param command - строка котрую вводят с консоли
      * @param collection - коллекция
      */
-    public static Object action(String command, LinkedHashSet<MusicBand> collection, String user){
+    public static Object action(String command, LinkedHashSet<MusicBand> collection, String user) throws UnsupportedEncodingException {
         Object message = "";
         Manager manager = new Manager();
         String element = "";
@@ -29,7 +29,7 @@ public class CommandAdd extends Command{
         int index;
         field = command.split(" ");
         if (field.length == 1){
-            message = ("Элемент отсутствует\n");
+            message = (LocaleManager.localizer("execution.element.missing") + "\n");
             logger.error(message);
             message = message + "\n";
         } else  if (field.length >= 2){

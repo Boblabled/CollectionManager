@@ -1,10 +1,11 @@
 package Commands;
 
 import Elements.MusicBand;
+import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class CommandRemoveById extends Command{
      * @param command - команда которую вводят с консоли
      * @param collection - коллекция
      */
-    public static Object action(String command, LinkedHashSet<MusicBand> collection, String user){
+    public static Object action(String command, LinkedHashSet<MusicBand> collection, String user) throws UnsupportedEncodingException {
         Object message = "";
         String[] fields;
         fields = command.split(" ");
@@ -28,17 +29,17 @@ public class CommandRemoveById extends Command{
         if (fields.length == 2){
             try {
                 collection.removeAll(collection.stream().filter((mb) -> mb.getUser().equals(user)).filter((mb) -> mb.getId() == (Long.parseLong(fields[1]))).collect(Collectors.toList()));
-                if (size != collection.size()) message = "Команда выполнена";
-                else message = "Не найдено элементов с таким id";
+                if (size != collection.size()) message = LocaleManager.localizer("execution.success");
+                else message = LocaleManager.localizer("execution.element.missingString") + " id";
                 logger.info(message);
                 message = message + "\n";
             } catch (NumberFormatException e) {
-                message = "id неверный формат строки!";
+                message = "id " + LocaleManager.localizer("execution.incorrectStringEnter");
                 logger.error(message);
                 message = message + "\n";
             }
         } else {
-            message = "Неверный формат ввода данных";
+            message = LocaleManager.localizer("execution.incorrectEnter");
             logger.error(message);
             message = message + "\n";
         }

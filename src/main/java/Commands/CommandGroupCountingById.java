@@ -1,9 +1,11 @@
 package Commands;
 
 import Elements.MusicBand;
+import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
@@ -18,7 +20,7 @@ public class CommandGroupCountingById extends Command{
      *
      * @param collection - коллекция
      */
-    public static Object action(LinkedHashSet<MusicBand> collection){
+    public static Object action(LinkedHashSet<MusicBand> collection) throws UnsupportedEncodingException {
         Object message = "";
         String[] fields;
         Object[] arr;
@@ -47,13 +49,13 @@ public class CommandGroupCountingById extends Command{
 
             index = 0;
             while (id[index] != null) {
-                message = message + "Количество элементов с id = " + id[index] + ": " + idCount[index] + "\n";
+                message = message + LocaleManager.localizer("id.execution.count") + " id = " + id[index] + ": " + idCount[index] + "\n";
                 index++;
                 if (index == collection.size()) break;
             }
-            logger.info("Команда выполнена");
+            logger.info(LocaleManager.localizer("execution.success"));
         } else {
-            message = "Коллекция пустая";
+            message = LocaleManager.localizer("execution.collectionEmpty");
             logger.error(message);
             message = message + "\n";
         }

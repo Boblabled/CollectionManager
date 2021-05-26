@@ -1,11 +1,12 @@
 package Commands;
 
-import DateBase.DateBase;
 import Elements.MusicBand;
 import Manager.Manager;
+import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashSet;
 
 /**
@@ -20,7 +21,7 @@ public class CommandUpdateId extends Command{
      * @param command - команда которую вводят с консоли
      * @param collection - коллекция
      */
-    public static Object action(String command, LinkedHashSet<MusicBand> collection, String user){
+    public static Object action(String command, LinkedHashSet<MusicBand> collection, String user) throws UnsupportedEncodingException {
         Object message = "";
         Manager manager = new Manager();
         long id = 0;
@@ -32,7 +33,7 @@ public class CommandUpdateId extends Command{
         field = command.split(" ");
         arr = collection.toArray(new MusicBand[0]);
         if (field.length == 1){
-            message ="id отсутствует";
+            message ="id " + LocaleManager.localizer("execution.element.missingString2");
             logger.error(message);
             message = message + "\n";
         } else try {
@@ -43,7 +44,7 @@ public class CommandUpdateId extends Command{
                     collection.remove((arr[index]));
                     CommandSave.action(collection);
                     manager.add(element, collection);
-                    message = "Команда выполнена";
+                    message = LocaleManager.localizer("execution.success");
                     logger.info(message);
                     message = message + "\n";
                     work = true;
@@ -51,12 +52,12 @@ public class CommandUpdateId extends Command{
                 }
             }
             if (!work) {
-                message = "Такого элемента не существует или у вас нет к нему доступа";
+                message = LocaleManager.localizer("execution.allowDeniedOrNotExist");
                 logger.error(message);
                 message = message + "\n";
             }
         } catch (NumberFormatException e) {
-            message = "id неверный формат строки!";
+            message = "id " + LocaleManager.localizer("execution.incorrectStringEnter");
             logger.error(message);
             message = message + "\n";
         }

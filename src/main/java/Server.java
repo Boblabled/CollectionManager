@@ -1,5 +1,7 @@
+import Commands.CommandChangeLanguage;
 import Commands.CommandExecution;
-import DateBase.DateBase;
+import Manager.DateBaseManager;
+import Manager.LocaleManager;
 import Serialization.Serialization;
 import Elements.MusicBand;
 import org.apache.logging.log4j.LogManager;
@@ -40,8 +42,8 @@ public class Server extends RecursiveTask<String> {
     public static void main(String[] args) {
         try {
             ForkJoinPool commonPool = new ForkJoinPool(4);
-            logger.info("Сервер запущен!");
-            DateBase.connect(collection);
+            logger.info(LocaleManager.localizer("server.launched") + "!");
+            DateBaseManager.connect(collection);
             while (true) {
                 work = true;
                 connection(true, "non");
@@ -103,18 +105,19 @@ public class Server extends RecursiveTask<String> {
      */
     public static void connection(boolean connect, String close) throws IOException {
         if (connect) {
+            CommandChangeLanguage.action("Language ru RU");
             server = new ServerSocket(port);
-            logger.info("Ожидание подключения...");
+            logger.info(LocaleManager.localizer("server.connection.waiting") + "...");
             clientSocket = server.accept();
-            logger.info("Соединение с клиентом установлено");
+            logger.info(LocaleManager.localizer("server.connection.clientConnected"));
         }
         if (!connect) {
-            logger.info("Соединение с клиентом разорвано");
+            logger.info(LocaleManager.localizer("server.connection.clientDisconnected"));
             clientSocket.close();
             server.close();
             if (close.equals("close server")){
-                DateBase.disconnect();
-                logger.info("Сервер закрыт!");
+                DateBaseManager.disconnect();
+                logger.info(LocaleManager.localizer("server.closed") + "!");
                 System.exit(0);
             }
         }
@@ -155,13 +158,17 @@ public class Server extends RecursiveTask<String> {
         out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
         Runnable task = () -> {
             try {
-                logger.info("Пользватель " + clientLogin + " ввёл: " + message);
+                logger.info(LocaleManager.localizer("server.write.clientWrite1") + " " + clientLogin + " " + LocaleManager.localizer("server.write.clientWrite2") + ": " + message);
                 String messageToClient = execution(message, today);
                 serialization.SerializeObject(messageToClient, temp, serializedDate);
                 out.write("\n");
                 out.flush();
             } catch (ExecutionException | IOException | InterruptedException ignored) {
-                logger.error("Ошибка отправки ответа");
+                try {
+                    logger.error(LocaleManager.localizer("server.write.failed"));
+                } catch (UnsupportedEncodingException e) {
+                    logger.error(e.getMessage());
+                }
             }
         };
         Thread thread = new Thread(task);
@@ -180,13 +187,17 @@ public class Server extends RecursiveTask<String> {
         Runnable task = () -> {
             try {
                 String messageToClient = "";
-                if (work) messageToClient = "\nВы успешно авторизировались";
-                else messageToClient = "\nВо время авторизации произошла ошибка, повторите попытку";
+                if (work) messageToClient = "\n" + LocaleManager.localizer("server.write.authorisation.success");
+                else messageToClient = "\n" + LocaleManager.localizer("server.write.authorisation1.failed");
                 serialization.SerializeObject(messageToClient, temp, serializedDate);
                 out.write("\n");
                 out.flush();
             } catch (IOException e) {
-                logger.error("Ошибка отправки ответа");
+                try {
+                    logger.error(LocaleManager.localizer("server.write.failed"));
+                } catch (UnsupportedEncodingException unsupportedEncodingException) {
+                    logger.error(unsupportedEncodingException.getMessage());
+                }
             }
         };
         Thread thread = new Thread(task);
@@ -196,7 +207,7 @@ public class Server extends RecursiveTask<String> {
     /**
      * Модуль авторизации
      */
-    public static void authorisation() {
+    public static void authorisation() throws UnsupportedEncodingException {
         while (work) {
             try {
                 String message = read();
@@ -204,15 +215,16 @@ public class Server extends RecursiveTask<String> {
                     String[] fields = message.split(" ");
                     boolean work = false;
                     if (fields.length == 3){
-                        clientLogin = fields[0];
-                        if (fields[2].equals("2")) work = DateBase.addUser(fields[0], fields[1]);
-                        else if (fields[2].equals("1")) work = DateBase.login(fields[0], fields[1]);
+                        clientLogin = fields[0].toLowerCase();
+                        if (fields[2].equals("2")) work = DateBaseManager.addUser(clientLogin, fields[1]);
+                        else if (fields[2].equals("1")) work = DateBaseManager.login(clientLogin, fields[1]);
+                        else execution(message, today);
                     }
                     write(work);
                     if (work) break;
                 }
-            } catch (IOException e) {
-                logger.error("Ошибка авторизации");
+            } catch (IOException | ExecutionException | InterruptedException e) {
+                logger.error(LocaleManager.localizer("server.write.authorisation2.failed"));
             }
         }
     }

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -9,9 +12,6 @@
 <?import javafx.scene.text.*?>
 
 <BorderPane prefHeight="800.0" prefWidth="1440.0" style="-fx-background-color: #F4F7FB;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainSceneController">
-   <children>
-
-   </children>
    <left>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
          <effect>
@@ -23,7 +23,7 @@
                <Font name="SFNS Display" size="20.0" />
             </font>
          </Label>
-            <Label alignment="CENTER" layoutX="25.0" layoutY="62.0" lineSpacing="2.0" prefHeight="30.0" prefWidth="150.0" style="-fx-font-weight: bold;" text="COMMANDS" textAlignment="CENTER" textFill="#1946ba" underline="true">
+            <Label fx:id="commandsLabel" alignment="CENTER" layoutX="25.0" layoutY="62.0" lineSpacing="2.0" prefHeight="30.0" prefWidth="150.0" style="-fx-font-weight: bold;" text="КОМАНДЫ" textAlignment="CENTER" textFill="#1946ba" underline="true">
                <font>
                   <Font name="ALS Schlange sans" size="20.0" />
                </font>
@@ -33,7 +33,7 @@
             </Label>
             <VBox alignment="TOP_CENTER" layoutX="11.0" layoutY="95.0" prefHeight="607.0" prefWidth="178.0" style="-fx-spacing: 8;">
                <children>
-                  <Button fx:id="help" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickHelp" prefHeight="10.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="help" textAlignment="CENTER" textFill="#1946ba">
+                  <Button fx:id="help" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickHelp" prefHeight="10.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="help" textAlignment="CENTER">
                      <font>
                         <Font name="SFNS Display" size="15.0" />
                      </font>
@@ -41,7 +41,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="info" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickInfo" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="info" textFill="#1946ba">
+                  <Button fx:id="info" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickInfo" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="info">
                      <font>
                         <Font name="SFNS Display" size="15.0" />
                      </font>
@@ -49,7 +49,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="clear" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickClear" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="clear" textFill="#1946ba">
+                  <Button fx:id="clear" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickClear" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="clear">
                      <font>
                         <Font name="SFNS Display" size="15.0" />
                      </font>
@@ -57,14 +57,14 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="history" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickHistory" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="history" textFill="#1946ba">
+                  <Button fx:id="history" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickHistory" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="history">
                      <font>
                         <Font name="SFNS Display" size="15.0" />
                      </font>
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
-                  </Button><Button fx:id="add" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickAdd" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="add" textFill="#1946ba">
+                  </Button><Button fx:id="add" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickAdd" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="add">
                   <font>
                      <Font name="SFNS Display" size="15.0" />
                   </font>
@@ -72,7 +72,7 @@
                      <Cursor fx:constant="HAND" />
                   </cursor>
                </Button>
-                  <Button fx:id="add_if_min" onAction="#clickAddIfMin" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="add_if_min" textFill="#1946ba">
+                  <Button fx:id="add_if_min" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickAddIfMin" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="add_if_min">
                      <font>
                         <Font name="SFNS Display" size="15.0" />
                      </font>
@@ -80,7 +80,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="remove_lower" onAction="#clickRemoveLower" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="33.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="remove_lower" textFill="#1946ba">
+                  <Button fx:id="remove_lower" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickRemoveLower" prefHeight="33.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="remove_lower">
                      <font>
                         <Font name="SFNS Display" size="15.0" />
                      </font>
@@ -88,7 +88,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="update_id" onAction="#clickUpdateId" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="update_id" textFill="#1946ba">
+                  <Button fx:id="update_id" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickUpdateId" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="update_id">
                      <font>
                         <Font name="SFNS Display" size="15.0" />
                      </font>
@@ -96,7 +96,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="remove_by_id" onAction="#clickRemoveById" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="remove_by_id" textFill="#1946ba">
+                  <Button fx:id="remove_by_id" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickRemoveById" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="remove_by_id">
                      <font>
                         <Font name="SFNS Display" size="15.0" />
                      </font>
@@ -104,7 +104,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="group_counting_by_id" onAction="#clickGroupCountingById" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="group_counting_by_id" textFill="#1946ba">
+                  <Button fx:id="group_counting_by_id" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickGroupCountingById" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="group_counting_by_id">
                      <font>
                         <Font name="SFNS Display" size="15.0" />
                      </font>
@@ -112,7 +112,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="execute_script" onAction="#clickExecuteScript" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="execute_script " textFill="#1946ba">
+                  <Button fx:id="execute_script" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickExecuteScript" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="execute_script ">
                      <font>
                         <Font name="SFNS Display" size="15.0" />
                      </font>
@@ -120,7 +120,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="count_by_albums_count" onAction="#clickCountByAlbumsCount" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="count_by_albums_count" textFill="#1946ba">
+                  <Button fx:id="count_by_albums_count" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickCountByAlbumsCount" prefHeight="35.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="count_by_albums_count">
                      <font>
                         <Font name="SFNS Display" size="14.0" />
                      </font>
@@ -128,7 +128,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="count_greater_than_albums_count" onAction="#clickGreaterThanCountByAlbumsCount" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="count_greater_than_albums_count" textFill="#1946ba">
+                  <Button fx:id="count_greater_than_albums_count" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickGreaterThanCountByAlbumsCount" prefHeight="35.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="count_greater_than_albums_count">
                      <font>
                         <Font name="SFNS Display" size="10.0" />
                      </font>
@@ -136,7 +136,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="exit" onAction="#clickExit" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="exit" textFill="#1946ba">
+                  <Button fx:id="exit" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#clickExit" prefHeight="30.0" prefWidth="178.0" style="-fx-border-color: #1946ba; -fx-border-radius: 15px; -fx-background-radius: 15px; -fx-border-width: 2; -fx-background-color: #fafafa;" stylesheets="@scripts/buttonStyle.css" text="exit">
                      <font>
                         <Font name="SFNS Display" size="15.0" />
                      </font>
@@ -154,7 +154,7 @@
    </left>
    <top>
       <Pane style="-fx-background-color: #FFFFFF;">
-         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="430.0" layoutY="8.0" prefHeight="100.0" prefWidth="580.0" style="-fx-font-family: &quot;ALS Schlange sans&quot;; -fx-font-weight: bold; -fx-font-size: 48px;" text="COLLECTION MANAGER" textFill="#1946ba">
+         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="430.0" layoutY="-5.0" prefHeight="67.0" prefWidth="580.0" style="-fx-font-family: &quot;ALS Schlange sans&quot;; -fx-font-weight: bold; -fx-font-size: 48px;" text="COLLECTION MANAGER" textFill="#1946ba">
             <font>
                <Font name="ALS Schlange sans" size="48.0" />
             </font>
@@ -164,187 +164,199 @@
                <Image url="@media/itmo_small_white_eng.png" />
             </image>
          </ImageView>
+         <TextField fx:id="filter" layoutX="579.0" layoutY="76.0" onAction="#clickFilter" prefHeight="25.0" prefWidth="282.0" promptText="Фильтация" style="-fx-border-color: #1946ba; -fx-background-radius: 2px; -fx-border-radius: 2px; -fx-border-width: 2;" stylesheets="@scripts/loginFields.css">
+            <font>
+               <Font name="SFNS Display" size="12.0" />
+            </font>
+         </TextField>
+         <ImageView fitHeight="32.0" fitWidth="28.0" layoutX="551.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@media/filter.png" />
+            </image>
+         </ImageView>
+         <ComboBox fx:id="language" layoutX="1266.0" layoutY="17.0" onAction="#clickLanguage" prefWidth="160.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #1946ba; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-border-width: 2;" stylesheets="@scripts/languageStyle.css">
+            <items>
+               <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Русский" />
+                  <String fx:value="Norsk" />
+                  <String fx:value="Català" />
+                  <String fx:value="Español (Puerto Rico)" />
+               </FXCollections>
+            </items>
+            <value>
+               <String fx:value="Русский" />
+            </value>
+         </ComboBox>
+         <ImageView fitHeight="29.0" fitWidth="40.0" layoutX="1230.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@media/languages.png" />
+            </image>
+         </ImageView>
+         <TextField fx:id="localDate" alignment="CENTER" editable="false" layoutX="1266.0" layoutY="51.0" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #1946ba; -fx-background-radius: 5px; -fx-border-radius: 5px; -fx-border-width: 2;" stylesheets="@scripts/languageStyle.css" text="DATE">
+            <cursor>
+               <Cursor fx:constant="DISAPPEAR" />
+            </cursor></TextField>
          <effect>
             <DropShadow />
          </effect>
       </Pane>
    </top>
    <center>
-      <ScrollPane prefHeight="886.0" prefWidth="1727.0">
-         <HBox layoutX="38.0" layoutY="35.0" prefHeight="626.0" prefWidth="1648.0" BorderPane.alignment="CENTER">
-            <children>
-               <VBox fx:id="trashColumn" prefHeight="626.0" prefWidth="35.0">
-                  <children>
-                     <Label prefHeight="27.0" prefWidth="157.0" />
-                  </children>
-               </VBox>
-               <VBox fx:id="idColumn" prefHeight="200.0" prefWidth="100.0">
-                  <children>
-                     <Button fx:id="ifFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="id" textFill="#ec0b43">
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="nameColumn" prefHeight="200.0" prefWidth="100.0">
-                  <children>
-                     <Button fx:id="nameFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="199.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="name" textFill="#ec0b43">
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="coordinateXColumn" prefHeight="200.0" prefWidth="100.0">
-                  <children>
-                     <Button fx:id="coordinateXFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="165.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="coordinateX" textFill="#ec0b43">
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="coordinateYColumn" prefHeight="200.0" prefWidth="100.0">
-                  <children>
-                     <Button fx:id="coordinateYFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="157.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="coordinateY" textFill="#ec0b43">
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="creationDateColumn" prefHeight="200.0" prefWidth="100.0">
-                  <children>
-                     <Button fx:id="creationDateFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="190.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="creationDate" textFill="#ec0b43">
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="numberOfParticipantsColumn" prefHeight="626.0" prefWidth="134.0">
-                  <children>
-                     <Button fx:id="numberOfParticipantsFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="134.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="numberOfParticipants" textFill="#ec0b43">
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="albumsCountColumn" prefHeight="200.0" prefWidth="100.0">
-                  <children>
-                     <Button fx:id="albumsCountFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="204.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="albumsCount" textFill="#ec0b43">
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="establishmentDateColumn" prefHeight="626.0" prefWidth="118.0">
-                  <children>
-                     <Button fx:id="establishmentDateFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="118.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="establishmentDate" textFill="#ec0b43">
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="genreColumn" prefHeight="200.0" prefWidth="100.0">
-                  <children>
-                     <Button fx:id="genreFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="genre" textFill="#ec0b43">
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="frontNameColumn" prefHeight="200.0" prefWidth="100.0">
-                  <children>
-                     <Button fx:id="frontmanNameFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="209.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="frontmanName" textFill="#ec0b43">
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="frontmanWeightColumn" prefHeight="626.0" prefWidth="107.0">
-                  <children>
-                     <Button fx:id="frontmanWeightFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="250.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="frontmanWeight" textFill="#ec0b43">
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="frontmanEyeColorColumn" prefHeight="626.0" prefWidth="114.0">
-                  <children>
-                     <Button fx:id="frontmanEyeColorFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="279.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="frontmanEyeColor" textFill="#ec0b43">
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="frontmanHairColorColumn" prefHeight="626.0" prefWidth="118.0">
-                  <children>
-                     <Button fx:id="frontmanHairColorFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="193.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" styleClass="frontmanHairColorFilter" stylesheets="@scripts/buttonAttractive.css" text="frontmanHairColor" textFill="#ec0b43">
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="frontmanNationalityColumn" prefHeight="626.0" prefWidth="125.0">
-                  <children>
-                     <Button fx:id="frontmanNationalityFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="126.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="frontmanNationality" textFill="#ec0b43">
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                     </Button>
-                  </children></VBox>
-               <VBox fx:id="userColumn" prefHeight="200.0" prefWidth="100.0">
-                  <children>
-                     <Button fx:id="userFilter" mnemonicParsing="false" prefHeight="27.0" prefWidth="100.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="user" textFill="#ec0b43">
-                        <cursor>
-                           <Cursor fx:constant="HAND" />
-                        </cursor>
-                        <font>
-                           <Font name="SFNS Display" size="12.0" />
-                        </font>
-                     </Button>
-                  </children></VBox>
-            </children>
-         </HBox>
+      <ScrollPane prefHeight="654.0" prefWidth="1240.0">
+         <content>
+            <GridPane fx:id="mainTable">
+              <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" />
+                <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints fx:id="filterRow" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="27.0" prefWidth="27.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+                  <Label prefHeight="27.0" prefWidth="27.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+                  <Button fx:id="idSorter" mnemonicParsing="false" onAction="#clickIdSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="id" textFill="#ec0b43" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="nameFilter" mnemonicParsing="false" onAction="#clickNameSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="name" textFill="#ec0b43" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="coordinateXSorter" mnemonicParsing="false" onAction="#clickCoordinateXSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="coordinateX" textFill="#ec0b43" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="coordinateYSorter" mnemonicParsing="false" onAction="#clickCoordinateYSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="coordinateY" textFill="#ec0b43" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="creationDateSorter" mnemonicParsing="false" onAction="#clickCreationDateSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="creationDate" textFill="#ec0b43" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="numberOfParticipantsSorter" mnemonicParsing="false" onAction="#clickNumberOfParticipantsSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="numberOfParticipants" textFill="#ec0b43" GridPane.columnIndex="7" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="albumsCountSorter" mnemonicParsing="false" onAction="#clickAlbumsCountSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="albumsCount" textFill="#ec0b43" GridPane.columnIndex="8" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="establishmentDateSorter" mnemonicParsing="false" onAction="#clickEstablishmentDateSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="establishmentDate" textFill="#ec0b43" GridPane.columnIndex="9" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="genreSorter" mnemonicParsing="false" onAction="#clickGenreSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="genre" textFill="#ec0b43" GridPane.columnIndex="10" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="frontmanNameSorter" mnemonicParsing="false" onAction="#clickFrontmanNameSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="frontmanName" textFill="#ec0b43" GridPane.columnIndex="11" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="frontmanWeightSorter" mnemonicParsing="false" onAction="#clickFrontmanWeightSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="frontmanWeight" textFill="#ec0b43" GridPane.columnIndex="12" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="frontmanEyeColorSorter" mnemonicParsing="false" onAction="#clickFrontmanEyeColorSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="frontmanEyeColor" textFill="#ec0b43" GridPane.columnIndex="13" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="frontmanHairColorSorter" mnemonicParsing="false" onAction="#clickFrontmanHairColorSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="frontmanHairColor" textFill="#ec0b43" GridPane.columnIndex="14" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="frontmanNationalitySorter" mnemonicParsing="false" onAction="#clickFrontmanNationalitySorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="frontmanNationality" textFill="#ec0b43" GridPane.columnIndex="15" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="userSorter" mnemonicParsing="false" onAction="#clickUserSorter" style="-fx-background-color: #FFFFFF; -fx-border-color: #fafafa;" stylesheets="@scripts/buttonAttractive.css" text="user" textFill="#ec0b43" GridPane.columnIndex="16" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <font>
+                        <Font name="SFNS Display" size="12.0" />
+                     </font>
+                  </Button>
+               </children>
+            </GridPane>
+         </content>
+         <stylesheets>
+            <URL value="@scripts/loginFields.css" />
+            <URL value="@scripts/scrollPane.css" />
+         </stylesheets>
       </ScrollPane>
    </center>
 </BorderPane>

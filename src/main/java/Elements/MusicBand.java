@@ -223,6 +223,54 @@ public class MusicBand implements Comparable<MusicBand>{
         return user;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public Float getCoordinateX() {
+        return coordinates.getX();
+    }
+
+    public double getCoordinateY() {
+        return coordinates.getY();
+    }
+
+    public Date getEstablishmentDate() {
+        return establishmentDate;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public long getNumberOfParticipants() {
+        return numberOfParticipants;
+    }
+
+    public MusicGenre getGenre() {
+        return genre;
+    }
+
+    public String getFrontManName() {
+        return frontMan.getName();
+    }
+
+    public Color getFrontManEyeColor() {
+        return frontMan.getEyeColor();
+    }
+
+    public Color getFrontManHairColor() {
+        return frontMan.getHairColor();
+    }
+
+    public Country getFrontManNationality() {
+        return frontMan.getNationality();
+    }
+
+    public Integer getFrontManWeight() {
+        return frontMan.getWeight();
+    }
+
     /**
      * Почти toString() но лучше
      *

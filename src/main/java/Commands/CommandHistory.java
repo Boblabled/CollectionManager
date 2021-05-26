@@ -1,7 +1,10 @@
 package Commands;
 
+import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Класс который хранит и выводит 12 последних команд
@@ -14,15 +17,15 @@ public class CommandHistory extends Command{
     /**
      *Метод который запускает вывод 12 последних команд
      */
-    public static Object action(){
+    public static Object action() throws UnsupportedEncodingException {
         Object message = "";
         int i;
-        message = "Последние 12 команд:";
+        message = LocaleManager.localizer("commandHistory.execution");
         for (i = 0; i<Index; i++){
             message = message + "\n" + storage[i];
         }
         message = message + "\n";
-        logger.info("Команда выполнена");
+        logger.info(LocaleManager.localizer("execution.success"));
         return message;
     }
 

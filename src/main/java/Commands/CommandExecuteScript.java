@@ -1,6 +1,7 @@
 package Commands;
 
 import Elements.MusicBand;
+import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,7 +24,7 @@ public class CommandExecuteScript extends Command{
      * @param command - комманда котрую вводят с консоли
      * @param time - текущее время
      */
-    public static Object action(LinkedHashSet<MusicBand> collection, String line, String command, LocalDateTime time, String user){
+    public static Object action(LinkedHashSet<MusicBand> collection, String line, String command, LocalDateTime time, String user) throws UnsupportedEncodingException {
         //execute_script commands.txt
         Object message = "";
         String temp = System.getenv().get("MusicBandPATH3");
@@ -45,8 +46,8 @@ public class CommandExecuteScript extends Command{
             try {
                 fis = new FileInputStream(way);
             } catch (FileNotFoundException e) {
-                message = "Файл не найден";
-                logger.error("Файл не найден");
+                message = LocaleManager.localizer("commandExecuteScript.file.notFound");
+                logger.error(message);
                 message = message + "\n";
             }
 
@@ -67,8 +68,8 @@ public class CommandExecuteScript extends Command{
                 message = message + currentMessage.toString();
             }
         } else {
-            message = "Неверный формат ввода данных";
-            logger.error("Неверный формат ввода данных");
+            message = LocaleManager.localizer("execution.incorrectEnter");
+            logger.error(message);
             message = message + "\n";
         }
         return message;

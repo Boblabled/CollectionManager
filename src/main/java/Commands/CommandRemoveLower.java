@@ -2,9 +2,11 @@ package Commands;
 
 import Elements.MusicBand;
 import Manager.Manager;
+import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashSet;
 import java.util.stream.Collectors;
 
@@ -20,7 +22,7 @@ public class CommandRemoveLower extends Command{
      * @param command - команда которую вводят с консоли
      * @param collection - коллекция
      */
-    public static Object action(String command, LinkedHashSet<MusicBand> collection, String user){
+    public static Object action(String command, LinkedHashSet<MusicBand> collection, String user) throws UnsupportedEncodingException {
         Manager manager = new Manager();
         Object message = "";
         String[] field;
@@ -29,7 +31,7 @@ public class CommandRemoveLower extends Command{
         String element;
         field = command.split(" ");
         if (field.length == 1){
-            message = "Элемент отсутствует";
+            message = LocaleManager.localizer("execution.element.missing");
             logger.error(message);
             message = message + "\n";
         } else  if (field.length >= 2){
@@ -41,18 +43,18 @@ public class CommandRemoveLower extends Command{
             }
             if (element.split(",").length == 12) {
                 String elementPrepared = element;
-                collection.removeAll(collection.stream().filter((mb) -> mb.getUser().equals(user)).filter((mb) -> mb.hashCode() == (manager.set(elementPrepared, user).hashCode())).collect(Collectors.toSet()));
-                if (size != collection.size()) message = "Команда выполнена";
-                else message = "Не найденно элементов меньше заданного";
+                collection.removeAll(collection.stream().filter((mb) -> mb.getUser().equals(user)).filter((mb) -> mb.hashCode() < (manager.set(elementPrepared, user).hashCode())).collect(Collectors.toSet()));
+                if (size != collection.size()) message = LocaleManager.localizer("execution.success");
+                else message = LocaleManager.localizer("CommandRemoveLower.execution.failed");
                 logger.info(message);
                 message = message + "\n";
             } else {
-                message = "Неверный формат ввода данных";
+                message = LocaleManager.localizer("execution.incorrectEnter");;
                 logger.error(message);
                 message = message + "\n";
             }
         } else {
-            message = "Неверный формат ввода данных";
+            message = LocaleManager.localizer("execution.incorrectEnter");
             logger.error(message);
             message = message + "\n";
         }

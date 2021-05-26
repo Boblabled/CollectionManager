@@ -1,7 +1,10 @@
 package Commands;
 
+import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Класс команды которая выводит справку по всем командам
@@ -12,25 +15,23 @@ public class CommandHelp extends Command{
     /**
      * Метод который выводит справку по всем командам
      */
-    public static Object action(){
-        Object message = ("""
-                help : вывести справку по доступным командам
-                info : вывести в стандартный поток вывода информацию о коллекции
-                show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении"
-                add {element} : добавить новый элемент в коллекцию
-                update_id id : обновить значение id у элемента коллекции
-                remove_by_id id : удалить элемент из коллекции по его id
-                clear : очистить коллекцию
-                execute_script file_name : считать и исполнить скрипт из указанного файла
-                exit : завершить программу (без сохранения в файл)
-                add_if_min {element} : добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции
-                remove_lower {element} : удалить из коллекции все элементы, меньшие, чем заданный
-                history : вывести последние 12 команд (без их аргументов)
-                group_counting_by_id : сгруппировать элементы коллекции по значению поля id, вывести количество элементов в каждой группе
-                count_by_albums_count albumsCount : вывести количество элементов, значение поля albumsCount которых равно заданному
-                count_greater_than_albums_count albumsCount : вывести количество элементов, значение поля albumsCount которых больше заданного
-                """);
-        logger.info("Команда выполнена");
+    public static Object action() throws UnsupportedEncodingException {
+        Object message = ("help : " + LocaleManager.localizer("commandHelp.help") +
+                    "\ninfo : " + LocaleManager.localizer("commandHelp.info") +
+                    "\nshow : " + LocaleManager.localizer("commandHelp.show") +
+                    "\nadd " + LocaleManager.localizer("commandHelp.add") +
+                    "\nupdate_id id : " + LocaleManager.localizer("commandHelp.update_id") +
+                    "\nremove_by_id id : " + LocaleManager.localizer("commandHelp.remove_by_id") +
+                    "\nclear : " + LocaleManager.localizer("commandHelp.clear") +
+                    "\nexecute_script file_name : " + LocaleManager.localizer("commandHelp.execute_script") +
+                    "\nexit : " + LocaleManager.localizer("commandHelp.exit") +
+                    "\nadd_if_min {element} : " + LocaleManager.localizer("commandHelp.add_if_min") +
+                    "\nremove_lower {element} : " + LocaleManager.localizer("commandHelp.remove_lower") +
+                    "\nhistory : " + LocaleManager.localizer("commandHelp.history") +
+                    "\ngroup_counting_by_id : " + LocaleManager.localizer("commandHelp.group_counting_by_id") +
+                    "\ncount_by_albums_count albumsCount : " + LocaleManager.localizer("commandHelp.count_by_albums_count") +
+                    "\ncount_greater_than_albums_count albumsCount : " + LocaleManager.localizer("commandHelp.count_greater_than_albums_count"));
+        logger.info(LocaleManager.localizer("execution.success"));
         return message;
     }
 }

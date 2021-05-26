@@ -1,14 +1,13 @@
 package Manager;
 
 import Elements.MusicBand;
-import DateBase.DateBase;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
 
 /**
  * Класс который работает с коллекцией
@@ -48,12 +47,42 @@ public class Manager {
     }
 
     /**
+     * Заполнение коллекции при первом запуске
+     *
+     * @param element - элемент из БД
+     * @param collection - коллекция
+     */
+    public void fill(String element, List<MusicBand> collection) {
+        String[] fields;
+        int index;
+        MusicBand musicband = new MusicBand();
+        fields = element.split(",");
+
+        for (index = 0; index<fields.length; index++){
+            if (fields[index].equals("null")){
+                fields[index] = null;
+            }
+        }
+        musicband.setId(fields[0]);
+        musicband.setName(fields[1]);
+        musicband.setCoordinates(fields[2], fields[3]);
+        musicband.setCreationDate(fields[4]);
+        musicband.setNumberOfParticipants(fields[5]);
+        musicband.setAlbumsCount(fields[6]);
+        musicband.setEstablishmentDate(fields[7]);
+        musicband.setGenre(fields[8]);
+        musicband.setFrontMan(fields[9], fields[10], fields[11], fields[12], fields[13]);
+        musicband.setUser(fields[14]);
+        collection.add(musicband);
+    }
+
+    /**
      * Добавляет новый файл в коллекцию
      *
      * @param element - элемент который вводят с консоли
      * @param collection - коллекция
      */
-    public Object add (String element, LinkedHashSet<MusicBand> collection){
+    public Object add (String element, LinkedHashSet<MusicBand> collection) throws UnsupportedEncodingException {
         Object message = "";
         LocalDateTime today = LocalDateTime.now();
         String[] fields;
@@ -70,8 +99,8 @@ public class Manager {
                     "frontMan_Nationality, \"user\") VALUES (nextval('randomid'), '" + fields[0] + "', " + fields[1] + ", " + fields[2] + ", '" +
                     today.toString() + "', " + fields[3] + ", " + fields[4] + ", '" + fields[5] + "', '" + fields[6] + "', '" + fields[7] +
                     "', " + fields[8] + ", '" + fields[9] + "', '" + fields[10] + "', '" + fields[11] + "', '"+ fields[12] + "')");
-            message = DateBase.executeCommand(command);
-            DateBase.load(collection);
+            message = DateBaseManager.executeCommand(command);
+            DateBaseManager.load(collection);
         } else if (fields.length == 15) {
             for (index = 0; index < fields.length; index++) {
                 if (fields[index].equals("null")) {
@@ -83,11 +112,25 @@ public class Manager {
                     "frontMan_Nationality, \"user\") VALUES (nextval('randomid'), '" + fields[1] + "', " + fields[2] + ", " + fields[3] + ", '" +
                     fields[4] + "', " + fields[5] + ", " + fields[6] + ", '" + fields[7] + "', '" + fields[8] + "', '" + fields[9] +
                     "', " + fields[10] + ", '" + fields[11] + "', '" + fields[12] + "', '" + fields[13]  + "', '" + fields[14] + "')");
-            message = DateBase.executeCommand(command);
-            DateBase.load(collection);
-        } else {
-            message = "Неверный формат элемента\n";
+            message = DateBaseManager.executeCommand(command);
+            DateBaseManager.load(collection);
+        } else if (fields.length == 16) {
+            for (index = 0; index < fields.length; index++) {
+                if (fields[index].equals("null")) {
+                    fields[index] = null;
+                }
+            }
+            String command = ("INSERT INTO MusicBand (id, name, coordinate_X, coordinate_Y, creationDate, numberOfParticipants, " +
+                    "albumsCount, establishmentDate, genre, frontMan_Name, frontMan_Weight, frontMan_EyeColor, frontMan_HairColor, " +
+                    "frontMan_Nationality, \"user\") VALUES (" +  fields[0] + ", '" + fields[1] + "', " + fields[2] + ", " + fields[3] + ", '" +
+                    fields[4] + "', " + fields[5] + ", " + fields[6] + ", '" + fields[7] + "', '" + fields[8] + "', '" + fields[9] +
+                    "', " + fields[10] + ", '" + fields[11] + "', '" + fields[12] + "', '" + fields[13]  + "', '" + fields[14] + "')");
+            message = DateBaseManager.executeCommand(command);
+            DateBaseManager.load(collection);
+        }  else {
+            message = LocaleManager.localizer("execution.incorrectElement");
             logger.error(message);
+            message = message + "\n";
         }
         return message;
     }

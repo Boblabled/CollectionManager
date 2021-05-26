@@ -1,9 +1,11 @@
 package Commands;
 
 import Elements.MusicBand;
+import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.UnsupportedEncodingException;
 import java.util.LinkedHashSet;
 
 /**
@@ -17,7 +19,7 @@ public class CommandShow extends Command{
      *
      * @param collection - коллекция
      */
-    public static Object action(LinkedHashSet<MusicBand> collection){
+    public static Object action(LinkedHashSet<MusicBand> collection) throws UnsupportedEncodingException {
         Object message= "";
         MusicBand[] arr;
         arr = collection.toArray(new MusicBand[0]);
@@ -30,8 +32,8 @@ public class CommandShow extends Command{
                 message = (message + "\n" +  arr[i].toString() + "\n");
             } else message = (message + "\n" + arr[i].toString());
         }
-        logger.info("Команда выполнена");
-        if (message.equals("")) message = "Коллекция пустая\n";
+        logger.info(LocaleManager.localizer("execution.success"));
+        if (message.equals("")) message = LocaleManager.localizer("execution.collectionEmpty") + "\n";
         return message;
     }
 }

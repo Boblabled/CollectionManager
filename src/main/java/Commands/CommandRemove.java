@@ -1,34 +1,34 @@
 package Commands;
 
 import Elements.MusicBand;
+import Manager.Manager;
 import Manager.LocaleManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * Класс команды которая добавляет элемент в коллекци, если его значение меньше, чем у наименьшего элемента этой коллекции
+ * Класс команды который удаляет из коллекции все элементы, меньшие, чем заданный
  */
-public class CommandAddIfMin extends Command{
+public class CommandRemove extends Command{
     private static final Logger logger = LogManager.getLogger();
 
     /**
-     * Метод который добавляет элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции
+     * Метод который удаляет из коллекции все элементы, меньшие, чем заданный
      *
-     * @param command - строка котрую вводят с консоли
+     * @param command - команда которую вводят с консоли
      * @param collection - коллекция
      */
     public static Object action(String command, LinkedHashSet<MusicBand> collection, String user) throws UnsupportedEncodingException {
+        Manager manager = new Manager();
         Object message = "";
         String[] field;
-        String element;
-        boolean work;
-        work = false;
+        int size = collection.size();
         int index;
+        String element;
         field = command.split(" ");
         if (field.length == 1){
             message = LocaleManager.localizer("execution.element.missing");
@@ -41,17 +41,16 @@ public class CommandAddIfMin extends Command{
                     element = element + " " + field[index];
                 }
             }
-            if (element.hashCode() < collection.stream().min(MusicBand::compareTo).get().hashCode()) {
-                CommandAdd.action(command, collection, user);
-                work = true;
-            }
-            if (!work) {
-                message = LocaleManager.localizer("execution.element.notLower");
+            if (element.split(",").length == 15) {
+                String elementPrepared = element;
+                collection.removeAll(collection.stream().filter((mb) -> mb.getUser().toLowerCase().equals(user)).filter((mb) -> mb.toString().equals(elementPrepared)).collect(Collectors.toSet()));
+                if (size != collection.size()) message = LocaleManager.localizer("execution.success");
+                else message = LocaleManager.localizer("execution.allowDenied");
                 logger.info(message);
                 message = message + "\n";
             } else {
-                message = LocaleManager.localizer("execution.success");
-                logger.info(message);
+                message = LocaleManager.localizer("execution.incorrectEnter");
+                logger.error(message);
                 message = message + "\n";
             }
         } else {
