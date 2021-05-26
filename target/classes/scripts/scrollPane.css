@@ -1,0 +1,12 @@
+.scroll-pane{
+    -fx-background-color: #fafafa;
+    -fx-border-color:  #fafafa;
+    -fx-focus-color: -fx-control-inner-background ;
+    -fx-faint-focus-color: -fx-control-inner-background ;
+}
+.scroll-pane:focused{
+    -fx-background-color: #fafafa;
+    -fx-border-color:  #fafafa;
+    -fx-focus-color: -fx-control-inner-background ;
+    -fx-faint-focus-color: -fx-control-inner-background ;
+}

@@ -1,0 +1,11 @@
+.combo-box.list-cell {
+    font-family: "SFNS Display";
+}
+
+.combo-box:hover{
+    -fx-border-color: #EC0B43!important;
+}
+
+.text-field:hover{
+    -fx-border-color: #EC0B43!important;
+}

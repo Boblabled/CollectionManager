@@ -1,0 +1,18 @@
+.text-field:hover{
+    -fx-border-color: #EC0B43!important;
+}
+.password-field:hover{
+    -fx-border-color: #EC0B43!important;
+}
+
+.text-field:focused{
+    -fx-border-color: #EC0B43!important;
+}
+.password-field:focused{
+    -fx-border-color: #EC0B43!important;
+}
+
+.text-field{
+    -fx-focus-color: -fx-control-inner-background ;
+    -fx-faint-focus-color: -fx-control-inner-background ;
+}
